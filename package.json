@@ -1,0 +1,28 @@
+{
+  "name": "@superbalist/js-pubsub-google-cloud",
+  "version": "0.0.1",
+  "description": "A Google Cloud adapter for the js-pubsub package.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Superbalist/js-pubsub-google-cloud.git"
+  },
+  "keywords": [
+    "pubsub",
+    "google",
+    "cloud"
+  ],
+  "author": "Superbalist.com a division of Takealot Online (Pty)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Superbalist/js-pubsub-google-cloud/issues"
+  },
+  "homepage": "https://github.com/Superbalist/js-pubsub-google-cloud#readme",
+  "dependencies": {
+    "@google-cloud/pubsub": "^0.11.0",
+    "@superbalist/js-pubsub": "0.0.1"
+  }
+}
