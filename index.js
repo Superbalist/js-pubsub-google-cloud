@@ -1,5 +1,7 @@
-"use strict";
+'use strict';
 
-var GoogleCloudPubSubAdapter = require('./src/GoogleCloudPubSubAdapter');
+/** @module pubsubGoogleCloud */
+
+let GoogleCloudPubSubAdapter = require('./src/GoogleCloudPubSubAdapter');
 
 module.exports.GoogleCloudPubSubAdapter = GoogleCloudPubSubAdapter;

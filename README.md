@@ -19,8 +19,8 @@ npm install @superbalist/js-pubsub-google-cloud
 ```node
 "use strict";
 
-var pubsub = require('@google-cloud/pubsub');
-var GoogleCloudPubSubAdapter = require('@superbalist/js-pubsub-google-cloud');
+let pubsub = require('@google-cloud/pubsub');
+let GoogleCloudPubSubAdapter = require('@superbalist/js-pubsub-google-cloud');
 
 process.env.GOOGLE_APPLICATION_CREDENTIALS = '/path/to/your-gcloud-key.json';
 
