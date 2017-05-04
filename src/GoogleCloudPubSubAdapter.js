@@ -3,6 +3,11 @@
 let Utils = require('@superbalist/js-pubsub').Utils;
 
 /**
+ * @callback subscriberCallback
+ * @param {*} message - The message payload received
+ */
+
+/**
  * GoogleCloudPubSubAdapter Class
  *
  * @implements {module:pubsub.PubSubAdapterInterface}
