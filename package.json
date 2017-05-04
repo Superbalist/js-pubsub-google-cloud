@@ -24,5 +24,9 @@
   "dependencies": {
     "@google-cloud/pubsub": "^0.11.0",
     "@superbalist/js-pubsub": "0.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-google": "^0.7.1"
   }
 }
