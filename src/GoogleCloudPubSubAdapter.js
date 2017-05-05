@@ -10,7 +10,7 @@ let Utils = require('@superbalist/js-pubsub').Utils;
 /**
  * GoogleCloudPubSubAdapter Class
  *
- * @implements {module:pubsub.PubSubAdapterInterface}
+ * @implements {module:@superbalist/js-pubsub.PubSubAdapterInterface}
  * @example
  * let pubsub = require('@google-cloud/pubsub');
  * let GoogleCloudPubSubAdapter = require('@superbalist/js-pubsub-google-cloud');

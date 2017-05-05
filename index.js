@@ -1,6 +1,6 @@
 'use strict';
 
-/** @module pubsubGoogleCloud */
+/** @module @superbalist/js-pubsub-google-cloud */
 
 let GoogleCloudPubSubAdapter = require('./src/GoogleCloudPubSubAdapter');
 
