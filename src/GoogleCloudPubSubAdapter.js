@@ -71,20 +71,10 @@ class GoogleCloudPubSubAdapter {
    * @return {Promise<module:pubsub/topic>}
    */
   getTopicForChannel(channel) {
-    return new Promise((resolve, reject) => {
-      this.client.topic(channel).get(
-        {
-          autoCreate: this.autoCreateTopics,
-        },
-        (err, topic) => {
-          if (err) {
-            reject(err);
-          } else {
-            resolve(topic);
-          }
-        }
-      );
-    });
+      let topic = this.client.topic(channel);
+      return topic.get({autoCreate: this.autoCreateTopics}).then((data) => {
+        return data[0]; // topic
+      });
   }
 
   /**
@@ -98,21 +88,14 @@ class GoogleCloudPubSubAdapter {
    * @return {Promise<module:pubsub/subscription>}
    */
   getSubscriptionForChannel(channel) {
-    return new Promise((resolve, reject) => {
-      this.getTopicForChannel(channel).then((topic) => {
-        let clientIdentifier = this.clientIdentifier || 'default';
-        topic.subscription(clientIdentifier).get(
-          {
-            autoCreate: this.autoCreateSubscriptions,
-          },
-          (err, subscription) => {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(subscription);
-            }
-          }
-        );
+    return this.getTopicForChannel(channel).then((topic) => {
+      let clientIdentifier = this.clientIdentifier || 'default';
+      return topic.subscription(clientIdentifier).get(
+        {
+          autoCreate: this.autoCreateSubscriptions,
+        }
+      ).then((data) => {
+        return data[0]; // subscription
       });
     });
   }
@@ -122,17 +105,20 @@ class GoogleCloudPubSubAdapter {
    *
    * @param {string} channel
    * @param {subscriberCallback} handler - The callback to run when a message is received
+   * @return {Promise<module:pubsub/subscription>}
    * @example
    * adapter.subscribe('my_channel', (message) => {
    *   console.log(message);
    * });
    */
   subscribe(channel, handler) {
-    this.getSubscriptionForChannel(channel).then((subscription) => {
+    return this.getSubscriptionForChannel(channel).then((subscription) => {
       subscription.on('message', (message) => {
         handler(Utils.unserializeMessagePayload(message.data));
         message.ack();
       });
+
+      return subscription;
     });
   }
 
@@ -141,6 +127,7 @@ class GoogleCloudPubSubAdapter {
    *
    * @param {string} channel
    * @param {*} message - The message payload
+   * @return {Promise<module:pubsub/topic>}
    * @example
    * // publish a string
    * adapter.publish('my_channel', 'Hello World');
@@ -152,8 +139,10 @@ class GoogleCloudPubSubAdapter {
    * });
    */
   publish(channel, message) {
-    this.getTopicForChannel(channel).then((topic) => {
+    return this.getTopicForChannel(channel).then((topic) => {
       topic.publish(message);
+
+      return topic;
     });
   }
 }

@@ -3,6 +3,7 @@
 A Google Cloud adapter for the [js-pubsub](https://github.com/Superbalist/js-pubsub) package.
 
 [![Author](http://img.shields.io/badge/author-@superbalist-blue.svg?style=flat-square)](https://twitter.com/superbalist)
+[![Build Status](https://img.shields.io/travis/Superbalist/js-pubsub-google-cloud/master.svg?style=flat-square)](https://travis-ci.org/Superbalist/js-pubsub-google-cloud)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 [![NPM Version](https://img.shields.io/npm/v/@superbalist/js-pubsub-google-cloud.svg)](https://www.npmjs.com/package/@superbalist/js-pubsub-google-cloud)
 [![NPM Downloads](https://img.shields.io/npm/dt/@superbalist/js-pubsub-google-cloud.svg)](https://www.npmjs.com/package/@superbalist/js-pubsub-google-cloud)
