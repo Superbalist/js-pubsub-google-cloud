@@ -1,6 +1,6 @@
 {
   "name": "@superbalist/js-pubsub-google-cloud",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A Google Cloud adapter for the js-pubsub package.",
   "main": "index.js",
   "scripts": {
@@ -24,7 +24,7 @@
   "homepage": "https://github.com/Superbalist/js-pubsub-google-cloud#readme",
   "dependencies": {
     "@google-cloud/pubsub": "^0.11.0",
-    "@superbalist/js-pubsub": "0.0.1"
+    "@superbalist/js-pubsub": "^1.0.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
