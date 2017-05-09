@@ -6,7 +6,7 @@ let should = chai.should;
 let chaiAsPromised = require('chai-as-promised');
 let sinon = require('sinon');
 let pubsub = require('@google-cloud/pubsub');
-let GoogleCloudPubSubAdapter = require('../src/GoogleCloudPubSubAdapter');
+let GoogleCloudPubSubAdapter = require('../lib/GoogleCloudPubSubAdapter');
 
 chai.use(chaiAsPromised);
 chai.should();

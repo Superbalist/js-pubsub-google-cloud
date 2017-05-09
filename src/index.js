@@ -2,6 +2,6 @@
 
 /** @module @superbalist/js-pubsub-google-cloud */
 
-let GoogleCloudPubSubAdapter = require('./src/GoogleCloudPubSubAdapter');
+let GoogleCloudPubSubAdapter = require('./GoogleCloudPubSubAdapter');
 
 module.exports = GoogleCloudPubSubAdapter;
