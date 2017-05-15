@@ -298,7 +298,7 @@ describe('GoogleCloudPubSubAdapter', () => {
 
       return adapter.subscribe('my_channel', handler).then(() => {
         resolvedSubscription.on.yield({
-          data: 'Hello World!',
+          data: '"Hello World!"',
           ack: () => {},
         });
 
@@ -337,7 +337,7 @@ describe('GoogleCloudPubSubAdapter', () => {
 
       return adapter.subscribe('my_channel', handler).then(() => {
         resolvedSubscription.on.yield({
-          data: 'Hello World!',
+          data: '"Hello World!"',
           ack: () => {},
         });
         resolvedSubscription.on.yield({
@@ -382,7 +382,7 @@ describe('GoogleCloudPubSubAdapter', () => {
 
       return adapter.subscribe('my_channel', handler).then(() => {
         let message = {
-          data: 'Hello World!',
+          data: '"Hello World!"',
           ack: sinon.spy(),
         };
         resolvedSubscription.on.yield(message);
@@ -413,12 +413,12 @@ describe('GoogleCloudPubSubAdapter', () => {
       let promises = [];
 
       promises.push(adapter.publish('my_channel', 'Hello World!'));
-      promises.push(adapter.publish('my_channel', '{"hello":"world"}'));
+      promises.push(adapter.publish('my_channel', {first_name: 'Matthew'}));
 
       return Promise.all(promises).then(() => {
         sinon.assert.calledTwice(resolvedTopic.publish);
-        sinon.assert.calledWith(resolvedTopic.publish, 'Hello World!');
-        sinon.assert.calledWith(resolvedTopic.publish, '{"hello":"world"}');
+        sinon.assert.calledWith(resolvedTopic.publish, '"Hello World!"');
+        sinon.assert.calledWith(resolvedTopic.publish, '{"first_name":"Matthew"}');
       });
     });
   });

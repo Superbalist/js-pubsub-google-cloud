@@ -10,5 +10,5 @@ let client = pubsub({
 });
 
 let adapter = new GoogleCloudPubSubAdapter(client);
-adapter.publish('my_channel', '{"first_name":"Matthew"}');
+adapter.publish('my_channel', {first_name: 'Matthew'});
 adapter.publish('my_channel', 'Hello World');

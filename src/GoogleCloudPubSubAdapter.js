@@ -140,7 +140,7 @@ class GoogleCloudPubSubAdapter {
    */
   publish(channel, message) {
     return this.getTopicForChannel(channel).then((topic) => {
-      topic.publish(message);
+      topic.publish(Utils.serializeMessagePayload(message));
 
       return topic;
     });
