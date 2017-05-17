@@ -422,4 +422,34 @@ describe('GoogleCloudPubSubAdapter', () => {
       });
     });
   });
+
+  describe('publishBatch', () => {
+    it('should publish multiple messages to a topic', () => {
+      let resolvedTopic = sinon.createStubInstance(pubsub.Topic);
+      resolvedTopic.publish = sinon.stub();
+
+      let topic = sinon.createStubInstance(pubsub.Topic);
+      topic.get = sinon.stub()
+        .returns(new Promise((resolve, reject) => resolve([resolvedTopic])));
+
+      let client = sinon.createStubInstance(pubsub);
+      client.topic = sinon.stub()
+        .returns(topic);
+
+      let adapter = new GoogleCloudPubSubAdapter(client);
+
+      let messages = [
+        'Hello World!',
+        {first_name: 'Matthew'},
+      ];
+      return adapter.publishBatch('my_channel', messages).then(() => {
+        sinon.assert.calledOnce(resolvedTopic.publish);
+        let payloads = [
+          '"Hello World!"',
+          '{"first_name":"Matthew"}',
+        ];
+        sinon.assert.calledWith(resolvedTopic.publish, payloads);
+      });
+    });
+  });
 });

@@ -48,6 +48,13 @@ adapter.subscribe('my_channel', (message) => {
 // publish messages
 adapter.publish('my_channel', {first_name: 'Matthew'});
 adapter.publish('my_channel', 'Hello World');
+
+// publish multiple messages
+let messages = [
+  'message 1',
+  'message 2',
+];
+adapter.publishBatch('my_channel', messages);
 ```
 
 ## Examples

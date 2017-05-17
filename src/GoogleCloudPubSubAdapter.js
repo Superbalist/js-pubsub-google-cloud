@@ -145,6 +145,30 @@ class GoogleCloudPubSubAdapter {
       return topic;
     });
   }
+
+  /**
+   * Publish multiple messages to a channel.
+   *
+   * @param {string} channel
+   * @param {*[]} messages
+   * @return {Promise<module:pubsub/topic>}
+   * @example
+   * let messages = [
+   *   'message 1',
+   *   'message 2',
+   * ];
+   * adapter.publishBatch('my_channel', messages);
+   */
+  publishBatch(channel, messages) {
+    let payloads = messages.map((message) => {
+      return Utils.serializeMessagePayload(message);
+    });
+    return this.getTopicForChannel(channel).then((topic) => {
+      topic.publish(payloads);
+
+      return topic;
+    });
+  }
 }
 
 module.exports = GoogleCloudPubSubAdapter;
