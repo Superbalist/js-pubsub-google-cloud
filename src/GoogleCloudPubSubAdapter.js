@@ -90,6 +90,7 @@ class GoogleCloudPubSubAdapter {
   getSubscriptionForChannel(channel) {
     return this.getTopicForChannel(channel).then((topic) => {
       let clientIdentifier = this.clientIdentifier || 'default';
+      clientIdentifier += '.' + channel;
       return topic.subscription(clientIdentifier).get(
         {
           autoCreate: this.autoCreateSubscriptions,

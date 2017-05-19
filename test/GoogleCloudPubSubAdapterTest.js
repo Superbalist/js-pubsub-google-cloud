@@ -172,7 +172,7 @@ describe('GoogleCloudPubSubAdapter', () => {
 
       return adapter.getSubscriptionForChannel('my_channel').then(() => {
         sinon.assert.calledOnce(resolvedTopic.subscription);
-        sinon.assert.calledWith(resolvedTopic.subscription, 'search');
+        sinon.assert.calledWith(resolvedTopic.subscription, 'search.my_channel');
       });
     });
 
@@ -199,7 +199,7 @@ describe('GoogleCloudPubSubAdapter', () => {
 
       return adapter.getSubscriptionForChannel('my_channel').then(() => {
         sinon.assert.calledOnce(resolvedTopic.subscription);
-        sinon.assert.calledWith(resolvedTopic.subscription, 'default');
+        sinon.assert.calledWith(resolvedTopic.subscription, 'default.my_channel');
       });
     });
 
