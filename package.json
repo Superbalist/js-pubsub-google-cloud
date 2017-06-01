@@ -1,6 +1,6 @@
 {
   "name": "@superbalist/js-pubsub-google-cloud",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "A Google Cloud adapter for the js-pubsub package.",
   "main": "lib/index.js",
   "scripts": {

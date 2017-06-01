@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.1 - 2017-05-19
+## 2.0.2 - 2017-05-19
 
 * Fix incorrect subscription name being created - should have channel prefixed
 
