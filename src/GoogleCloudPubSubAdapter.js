@@ -141,7 +141,7 @@ class GoogleCloudPubSubAdapter {
    */
   publish(channel, message) {
     return this.getTopicForChannel(channel).then((topic) => {
-      topic.publish(Utils.serializeMessagePayload(message));
+      topic.publish(this.makeBuffer(message));
 
       return topic;
     });
@@ -162,13 +162,25 @@ class GoogleCloudPubSubAdapter {
    */
   publishBatch(channel, messages) {
     let payloads = messages.map((message) => {
-      return Utils.serializeMessagePayload(message);
+      return this.makeBuffer(message);
     });
     return this.getTopicForChannel(channel).then((topic) => {
       topic.publish(payloads);
 
       return topic;
     });
+  }
+
+  /**
+   * Create a buffer from a message payload.
+   *
+   * @param {*} message
+   * @return {Buffer}
+   * @example
+   * adapter.makeBuffer('Hello World!');
+   */
+  makeBuffer(message) {
+    return new Buffer(Utils.serializeMessagePayload(message));
   }
 }
 

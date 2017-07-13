@@ -410,6 +410,15 @@ describe('GoogleCloudPubSubAdapter', () => {
 
       let adapter = new GoogleCloudPubSubAdapter(client);
 
+      let buffer1 = sinon.stub();
+      let buffer2 = sinon.stub();
+
+      adapter.makeBuffer = sinon.stub();
+      adapter.makeBuffer.withArgs('Hello World!')
+        .returns(buffer1);
+      adapter.makeBuffer.withArgs({first_name: 'Matthew'})
+        .returns(buffer2);
+
       let promises = [];
 
       promises.push(adapter.publish('my_channel', 'Hello World!'));
@@ -417,8 +426,8 @@ describe('GoogleCloudPubSubAdapter', () => {
 
       return Promise.all(promises).then(() => {
         sinon.assert.calledTwice(resolvedTopic.publish);
-        sinon.assert.calledWith(resolvedTopic.publish, '"Hello World!"');
-        sinon.assert.calledWith(resolvedTopic.publish, '{"first_name":"Matthew"}');
+        sinon.assert.calledWith(resolvedTopic.publish, buffer1);
+        sinon.assert.calledWith(resolvedTopic.publish, buffer2);
       });
     });
   });
@@ -438,6 +447,15 @@ describe('GoogleCloudPubSubAdapter', () => {
 
       let adapter = new GoogleCloudPubSubAdapter(client);
 
+      let buffer1 = sinon.stub();
+      let buffer2 = sinon.stub();
+
+      adapter.makeBuffer = sinon.stub();
+      adapter.makeBuffer.withArgs('Hello World!')
+        .returns(buffer1);
+      adapter.makeBuffer.withArgs({first_name: 'Matthew'})
+        .returns(buffer2);
+
       let messages = [
         'Hello World!',
         {first_name: 'Matthew'},
@@ -445,11 +463,25 @@ describe('GoogleCloudPubSubAdapter', () => {
       return adapter.publishBatch('my_channel', messages).then(() => {
         sinon.assert.calledOnce(resolvedTopic.publish);
         let payloads = [
-          '"Hello World!"',
-          '{"first_name":"Matthew"}',
+          buffer1,
+          buffer2,
         ];
         sinon.assert.calledWith(resolvedTopic.publish, payloads);
       });
+    });
+  });
+
+  describe('makeBuffer', () => {
+    it('should encode a message in a buffer', () => {
+      let client = sinon.createStubInstance(pubsub);
+      let adapter = new GoogleCloudPubSubAdapter(client);
+
+      let buffer1 = adapter.makeBuffer('Hello World!');
+      expect(buffer1).to.be.an.object;
+      expect(buffer1.toString('utf8')).to.equal('"Hello World!"');
+
+      let buffer2 = adapter.makeBuffer({first_name: 'Matthew'});
+      expect(buffer2.toString('utf8')).to.equal('{"first_name":"Matthew"}');
     });
   });
 });
