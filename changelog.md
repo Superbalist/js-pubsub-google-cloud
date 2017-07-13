@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.0.3 - 2017-07-13
+
+* Fix double json encoding by passing a buffer when publishing methods with client
+
 ## 2.0.2 - 2017-05-19
 
 * Fix incorrect subscription name being created - should have channel prefixed
