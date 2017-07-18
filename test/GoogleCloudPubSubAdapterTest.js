@@ -399,6 +399,10 @@ describe('GoogleCloudPubSubAdapter', () => {
     it('should publish the message to a topic', () => {
       let resolvedTopic = sinon.createStubInstance(pubsub.Topic);
       resolvedTopic.publish = sinon.stub();
+      resolvedTopic.publish.onCall(0)
+        .returns(Promise.resolve('result1'));
+      resolvedTopic.publish.onCall(1)
+        .returns(Promise.resolve('result2'));
 
       let topic = sinon.createStubInstance(pubsub.Topic);
       topic.get = sinon.stub()
@@ -424,10 +428,13 @@ describe('GoogleCloudPubSubAdapter', () => {
       promises.push(adapter.publish('my_channel', 'Hello World!'));
       promises.push(adapter.publish('my_channel', {first_name: 'Matthew'}));
 
-      return Promise.all(promises).then(() => {
+      return Promise.all(promises).then((results) => {
         sinon.assert.calledTwice(resolvedTopic.publish);
         sinon.assert.calledWith(resolvedTopic.publish, buffer1);
         sinon.assert.calledWith(resolvedTopic.publish, buffer2);
+
+        expect(results[0]).to.equal('result1');
+        expect(results[1]).to.equal('result2');
       });
     });
   });
@@ -435,7 +442,8 @@ describe('GoogleCloudPubSubAdapter', () => {
   describe('publishBatch', () => {
     it('should publish multiple messages to a topic', () => {
       let resolvedTopic = sinon.createStubInstance(pubsub.Topic);
-      resolvedTopic.publish = sinon.stub();
+      resolvedTopic.publish = sinon.stub()
+        .returns(Promise.resolve(['result1', 'result2']));
 
       let topic = sinon.createStubInstance(pubsub.Topic);
       topic.get = sinon.stub()
@@ -460,13 +468,15 @@ describe('GoogleCloudPubSubAdapter', () => {
         'Hello World!',
         {first_name: 'Matthew'},
       ];
-      return adapter.publishBatch('my_channel', messages).then(() => {
+      return adapter.publishBatch('my_channel', messages).then((results) => {
         sinon.assert.calledOnce(resolvedTopic.publish);
         let payloads = [
           buffer1,
           buffer2,
         ];
         sinon.assert.calledWith(resolvedTopic.publish, payloads);
+
+        expect(results).to.deep.equal(['result1', 'result2']);
       });
     });
   });

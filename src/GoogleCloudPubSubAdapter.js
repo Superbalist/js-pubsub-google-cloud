@@ -128,7 +128,7 @@ class GoogleCloudPubSubAdapter {
    *
    * @param {string} channel
    * @param {*} message - The message payload
-   * @return {Promise<module:pubsub/topic>}
+   * @return {Promise<*>}
    * @example
    * // publish a string
    * adapter.publish('my_channel', 'Hello World');
@@ -141,9 +141,7 @@ class GoogleCloudPubSubAdapter {
    */
   publish(channel, message) {
     return this.getTopicForChannel(channel).then((topic) => {
-      topic.publish(this.makeBuffer(message));
-
-      return topic;
+      return topic.publish(this.makeBuffer(message));
     });
   }
 
@@ -152,7 +150,7 @@ class GoogleCloudPubSubAdapter {
    *
    * @param {string} channel
    * @param {*[]} messages
-   * @return {Promise<module:pubsub/topic>}
+   * @return {Promise<*>}
    * @example
    * let messages = [
    *   'message 1',
@@ -165,9 +163,7 @@ class GoogleCloudPubSubAdapter {
       return this.makeBuffer(message);
     });
     return this.getTopicForChannel(channel).then((topic) => {
-      topic.publish(payloads);
-
-      return topic;
+      return topic.publish(payloads);
     });
   }
 
