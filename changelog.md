@@ -1,8 +1,10 @@
 # Changelog
 
-## 3.0.0 - 2017-07-18
+## 3.0.1 - 2017-07-18
 
 * Change publish and publishBatch methods to return a promise with the result of the publish call, instead of the topic
+
+## 3.0.0 - 2017-07-18 (broken build)
 
 ## 2.0.3 - 2017-07-13
 
