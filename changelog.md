@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.0 - 2017-07-18
+
+* Change publish and publishBatch methods to return a promise with the result of the publish call, instead of the topic
+
 ## 2.0.3 - 2017-07-13
 
 * Fix double json encoding by passing a buffer when publishing methods with client
