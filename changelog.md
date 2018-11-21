@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.2 - 2018-11-21
+
+* Add an in-memory cache onto get topics
+
 ## 3.0.1 - 2017-07-18
 
 * Change publish and publishBatch methods to return a promise with the result of the publish call, instead of the topic
