@@ -1,7 +1,7 @@
 'use strict';
 
 let Utils = require('@superbalist/js-pubsub').Utils;
-
+let topics = {};
 /**
  * @callback subscriberCallback
  * @param {*} message - The message payload received
@@ -71,8 +71,13 @@ class GoogleCloudPubSubAdapter {
    * @return {Promise<module:pubsub/topic>}
    */
   getTopicForChannel(channel) {
+      if (topics[channel]) {
+        return Promise.resolve(topics[channel])
+      }
+
       let topic = this.client.topic(channel);
       return topic.get({autoCreate: this.autoCreateTopics}).then((data) => {
+        topics[channel] = data[0]
         return data[0]; // topic
       });
   }
