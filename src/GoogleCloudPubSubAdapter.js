@@ -12,13 +12,13 @@ let _topics = {};
  *
  * @implements {module:@superbalist/js-pubsub.PubSubAdapterInterface}
  * @example
- * let pubsub = require('@google-cloud/pubsub');
+ * let {PubSub} = require('@google-cloud/pubsub');
  * let GoogleCloudPubSubAdapter = require('@superbalist/js-pubsub-google-cloud');
  *
  * // create adapter
  * process.env.GOOGLE_APPLICATION_CREDENTIALS = '/usr/src/app/examples/your-gcloud-key.json';
  *
- * let client = pubsub({
+ * let client = new PubSub({
  *   projectId: 'your-project-id-here',
  * });
  *
@@ -72,12 +72,12 @@ class GoogleCloudPubSubAdapter {
    */
   getTopicForChannel(channel) {
       if (_topics[channel]) {
-        return Promise.resolve(_topics[channel])
+        return Promise.resolve(_topics[channel]);
       }
 
       let topic = this.client.topic(channel);
       return topic.get({autoCreate: this.autoCreateTopics}).then((data) => {
-        _topics[channel] = data[0]
+        _topics[channel] = data[0];
         return data[0]; // topic
       });
   }
