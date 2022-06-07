@@ -4,7 +4,7 @@
   "description": "A Google Cloud adapter for the js-pubsub package.",
   "main": "lib/index.js",
   "scripts": {
-    "build": "./node_modules/.bin/babel --presets babel-preset-es2015 --out-dir lib/ src/",
+    "build": "./node_modules/.bin/babel --out-dir lib/ src/",
     "prepublish": "npm run build",
     "test": "npm run build && mocha test",
     "coverage": "npm run build && ./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha -- --ui bdd -R spec -t 5000"
@@ -25,18 +25,19 @@
   },
   "homepage": "https://github.com/Superbalist/js-pubsub-google-cloud#readme",
   "dependencies": {
-    "@google-cloud/pubsub": "^0.11.0",
-    "@superbalist/js-pubsub": "^3.0.0"
+    "@google-cloud/pubsub": "2.19.0",
+    "@superbalist/js-pubsub": "file:../superbalist-js-pubsub-3.0.0.tgz"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-es2015": "^6.24.1",
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
     "chai": "^3.5.0",
     "chai-as-promised": "^6.0.0",
-    "eslint": "^3.19.0",
+    "eslint": "^8.12.0",
     "eslint-config-google": "^0.7.1",
     "istanbul": "^0.4.5",
-    "mocha": "^3.3.0",
+    "mocha": "^9.2.2",
     "sinon": "^2.2.0"
   }
 }
